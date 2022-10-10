@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="oefa.gob.pe.infraestructure_data.mapper.TMapArchivoAlfrescoMapper">
+  <resultMap id="BaseResultMap" type="oefa.gob.pe.infraestructure_data.model.TMapArchivoAlfresco">
+    <!--@mbg.generated-->
+    <!--@Table MONITOREO.T_MAP_ARCHIVO_ALFRESCO-->
+    <id column="ID_ARCHIVO" jdbcType="DECIMAL" property="idArchivo" />
+    <result column="TX_NOMBRE_ARCHIVO" jdbcType="VARCHAR" property="txNombreArchivo" />
+    <result column="TX_RUTA_ALFRESCO" jdbcType="VARCHAR" property="txRutaAlfresco" />
+    <result column="TX_UIID" jdbcType="VARCHAR" property="txUiid" />
+    <result column="TX_NOMBRE_ARCHIVO_ORIGINAL" jdbcType="VARCHAR" property="txNombreArchivoOriginal" />
+    <result column="FG_SITREG" jdbcType="CHAR" property="fgSitreg" />
+    <result column="AUD_CREADO_POR" jdbcType="VARCHAR" property="audCreadoPor" />
+    <result column="AUD_FECHA_CREACION" jdbcType="TIMESTAMP" property="audFechaCreacion" />
+    <result column="AUD_MODIFICADO_POR" jdbcType="VARCHAR" property="audModificadoPor" />
+    <result column="AUD_FECHA_MODIFICACION" jdbcType="TIMESTAMP" property="audFechaModificacion" />
+    <result column="AUD_ELIMINADO_POR" jdbcType="VARCHAR" property="audEliminadoPor" />
+    <result column="AUD_FECHA_ELIMINACION" jdbcType="TIMESTAMP" property="audFechaEliminacion" />
+    <result column="NU_FOLIOS" jdbcType="DECIMAL" property="nuFolios" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!--@mbg.generated-->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    ID_ARCHIVO, TX_NOMBRE_ARCHIVO, TX_RUTA_ALFRESCO, TX_UIID, TX_NOMBRE_ARCHIVO_ORIGINAL, 
+    FG_SITREG, AUD_CREADO_POR, AUD_FECHA_CREACION, AUD_MODIFICADO_POR, AUD_FECHA_MODIFICACION, 
+    AUD_ELIMINADO_POR, AUD_FECHA_ELIMINACION, NU_FOLIOS
+  </sql>
+  <select id="selectByExample" parameterType="oefa.gob.pe.infraestructure_data.model.TMapArchivoAlfrescoExample" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from MONITOREO.T_MAP_ARCHIVO_ALFRESCO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from MONITOREO.T_MAP_ARCHIVO_ALFRESCO
+    where ID_ARCHIVO = #{idArchivo,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    <!--@mbg.generated-->
+    delete from MONITOREO.T_MAP_ARCHIVO_ALFRESCO
+    where ID_ARCHIVO = #{idArchivo,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="oefa.gob.pe.infraestructure_data.model.TMapArchivoAlfrescoExample">
+    <!--@mbg.generated-->
+    delete from MONITOREO.T_MAP_ARCHIVO_ALFRESCO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="ID_ARCHIVO" keyProperty="idArchivo" parameterType="oefa.gob.pe.infraestructure_data.model.TMapArchivoAlfresco" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into MONITOREO.T_MAP_ARCHIVO_ALFRESCO (TX_NOMBRE_ARCHIVO, TX_RUTA_ALFRESCO, 
+      TX_UIID, TX_NOMBRE_ARCHIVO_ORIGINAL, FG_SITREG, 
+      AUD_CREADO_POR, AUD_FECHA_CREACION, AUD_MODIFICADO_POR, 
+      AUD_FECHA_MODIFICACION, AUD_ELIMINADO_POR, 
+      AUD_FECHA_ELIMINACION, NU_FOLIOS)
+    values (#{txNombreArchivo,jdbcType=VARCHAR}, #{txRutaAlfresco,jdbcType=VARCHAR}, 
+      #{txUiid,jdbcType=VARCHAR}, #{txNombreArchivoOriginal,jdbcType=VARCHAR}, #{fgSitreg,jdbcType=CHAR}, 
+      #{audCreadoPor,jdbcType=VARCHAR}, #{audFechaCreacion,jdbcType=TIMESTAMP}, #{audModificadoPor,jdbcType=VARCHAR}, 
+      #{audFechaModificacion,jdbcType=TIMESTAMP}, #{audEliminadoPor,jdbcType=VARCHAR}, 
+      #{audFechaEliminacion,jdbcType=TIMESTAMP}, #{nuFolios,jdbcType=DECIMAL})
+  </insert>
+  <select id="insertReturningId" statementType="CALLABLE" parameterType="map">
+    {CALL MONITOREO.INSERTAR_ARCHIVO(#{dao.txNombreArchivo,jdbcType=VARCHAR}, #{dao.txRutaAlfresco,jdbcType=VARCHAR},
+    #{dao.txUiid,jdbcType=VARCHAR}, #{dao.txNombreArchivoOriginal,jdbcType=VARCHAR}, #{dao.fgSitreg,jdbcType=CHAR},
+    #{dao.audCreadoPor,jdbcType=VARCHAR}, #{dao.audFechaCreacion,jdbcType=TIMESTAMP}, #{dao.audModificadoPor,jdbcType=VARCHAR},
+    #{dao.audFechaModificacion,jdbcType=TIMESTAMP}, #{dao.audEliminadoPor,jdbcType=VARCHAR},
+    #{dao.audFechaEliminacion,jdbcType=TIMESTAMP}, #{dao.nuFolios,jdbcType=DECIMAL}, #{dao.idArchivo,jdbcType=DECIMAL,mode=OUT})}
+  </select>
+  <insert id="insertSelective" keyColumn="ID_ARCHIVO" keyProperty="idArchivo" parameterType="oefa.gob.pe.infraestructure_data.model.TMapArchivoAlfresco" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into MONITOREO.T_MAP_ARCHIVO_ALFRESCO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="txNombreArchivo != null">
+        TX_NOMBRE_ARCHIVO,
+      </if>
+      <if test="txRutaAlfresco != null">
+        TX_RUTA_ALFRESCO,
+      </if>
+      <if test="txUiid != null">
+        TX_UIID,
+      </if>
+      <if test="txNombreArchivoOriginal != null">
+        TX_NOMBRE_ARCHIVO_ORIGINAL,
+      </if>
+      <if test="fgSitreg != null">
+        FG_SITREG,
+      </if>
+      <if test="audCreadoPor != null">
+        AUD_CREADO_POR,
+      </if>
+      <if test="audFechaCreacion != null">
+        AUD_FECHA_CREACION,
+      </if>
+      <if test="audModificadoPor != null">
+        AUD_MODIFICADO_POR,
+      </if>
+      <if test="audFechaModificacion != null">
+        AUD_FECHA_MODIFICACION,
+      </if>
+      <if test="audEliminadoPor != null">
+        AUD_ELIMINADO_POR,
+      </if>
+      <if test="audFechaEliminacion != null">
+        AUD_FECHA_ELIMINACION,
+      </if>
+      <if test="nuFolios != null">
+        NU_FOLIOS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="txNombreArchivo != null">
+        #{txNombreArchivo,jdbcType=VARCHAR},
+      </if>
+      <if test="txRutaAlfresco != null">
+        #{txRutaAlfresco,jdbcType=VARCHAR},
+      </if>
+      <if test="txUiid != null">
+        #{txUiid,jdbcType=VARCHAR},
+      </if>
+      <if test="txNombreArchivoOriginal != null">
+        #{txNombreArchivoOriginal,jdbcType=VARCHAR},
+      </if>
+      <if test="fgSitreg != null">
+        #{fgSitreg,jdbcType=CHAR},
+      </if>
+      <if test="audCreadoPor != null">
+        #{audCreadoPor,jdbcType=VARCHAR},
+      </if>
+      <if test="audFechaCreacion != null">
+        #{audFechaCreacion,jdbcType=TIMESTAMP},
+      </if>
+      <if test="audModificadoPor != null">
+        #{audModificadoPor,jdbcType=VARCHAR},
+      </if>
+      <if test="audFechaModificacion != null">
+        #{audFechaModificacion,jdbcType=TIMESTAMP},
+      </if>
+      <if test="audEliminadoPor != null">
+        #{audEliminadoPor,jdbcType=VARCHAR},
+      </if>
+      <if test="audFechaEliminacion != null">
+        #{audFechaEliminacion,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nuFolios != null">
+        #{nuFolios,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="oefa.gob.pe.infraestructure_data.model.TMapArchivoAlfrescoExample" resultType="java.lang.Long">
+    <!--@mbg.generated-->
+    select count(*) from MONITOREO.T_MAP_ARCHIVO_ALFRESCO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!--@mbg.generated-->
+    update MONITOREO.T_MAP_ARCHIVO_ALFRESCO
+    <set>
+      <if test="record.idArchivo != null">
+        ID_ARCHIVO = #{record.idArchivo,jdbcType=DECIMAL},
+      </if>
+      <if test="record.txNombreArchivo != null">
+        TX_NOMBRE_ARCHIVO = #{record.txNombreArchivo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.txRutaAlfresco != null">
+        TX_RUTA_ALFRESCO = #{record.txRutaAlfresco,jdbcType=VARCHAR},
+      </if>
+      <if test="record.txUiid != null">
+        TX_UIID = #{record.txUiid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.txNombreArchivoOriginal != null">
+        TX_NOMBRE_ARCHIVO_ORIGINAL = #{record.txNombreArchivoOriginal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fgSitreg != null">
+        FG_SITREG = #{record.fgSitreg,jdbcType=CHAR},
+      </if>
+      <if test="record.audCreadoPor != null">
+        AUD_CREADO_POR = #{record.audCreadoPor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.audFechaCreacion != null">
+        AUD_FECHA_CREACION = #{record.audFechaCreacion,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.audModificadoPor != null">
+        AUD_MODIFICADO_POR = #{record.audModificadoPor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.audFechaModificacion != null">
+        AUD_FECHA_MODIFICACION = #{record.audFechaModificacion,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.audEliminadoPor != null">
+        AUD_ELIMINADO_POR = #{record.audEliminadoPor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.audFechaEliminacion != null">
+        AUD_FECHA_ELIMINACION = #{record.audFechaEliminacion,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.nuFolios != null">
+        NU_FOLIOS = #{record.nuFolios,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!--@mbg.generated-->
+    update MONITOREO.T_MAP_ARCHIVO_ALFRESCO
+    set ID_ARCHIVO = #{record.idArchivo,jdbcType=DECIMAL},
+      TX_NOMBRE_ARCHIVO = #{record.txNombreArchivo,jdbcType=VARCHAR},
+      TX_RUTA_ALFRESCO = #{record.txRutaAlfresco,jdbcType=VARCHAR},
+      TX_UIID = #{record.txUiid,jdbcType=VARCHAR},
+      TX_NOMBRE_ARCHIVO_ORIGINAL = #{record.txNombreArchivoOriginal,jdbcType=VARCHAR},
+      FG_SITREG = #{record.fgSitreg,jdbcType=CHAR},
+      AUD_CREADO_POR = #{record.audCreadoPor,jdbcType=VARCHAR},
+      AUD_FECHA_CREACION = #{record.audFechaCreacion,jdbcType=TIMESTAMP},
+      AUD_MODIFICADO_POR = #{record.audModificadoPor,jdbcType=VARCHAR},
+      AUD_FECHA_MODIFICACION = #{record.audFechaModificacion,jdbcType=TIMESTAMP},
+      AUD_ELIMINADO_POR = #{record.audEliminadoPor,jdbcType=VARCHAR},
+      AUD_FECHA_ELIMINACION = #{record.audFechaEliminacion,jdbcType=TIMESTAMP},
+      NU_FOLIOS = #{record.nuFolios,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="oefa.gob.pe.infraestructure_data.model.TMapArchivoAlfresco">
+    <!--@mbg.generated-->
+    update MONITOREO.T_MAP_ARCHIVO_ALFRESCO
+    <set>
+      <if test="txNombreArchivo != null">
+        TX_NOMBRE_ARCHIVO = #{txNombreArchivo,jdbcType=VARCHAR},
+      </if>
+      <if test="txRutaAlfresco != null">
+        TX_RUTA_ALFRESCO = #{txRutaAlfresco,jdbcType=VARCHAR},
+      </if>
+      <if test="txUiid != null">
+        TX_UIID = #{txUiid,jdbcType=VARCHAR},
+      </if>
+      <if test="txNombreArchivoOriginal != null">
+        TX_NOMBRE_ARCHIVO_ORIGINAL = #{txNombreArchivoOriginal,jdbcType=VARCHAR},
+      </if>
+      <if test="fgSitreg != null">
+        FG_SITREG = #{fgSitreg,jdbcType=CHAR},
+      </if>
+      <if test="audCreadoPor != null">
+        AUD_CREADO_POR = #{audCreadoPor,jdbcType=VARCHAR},
+      </if>
+      <if test="audFechaCreacion != null">
+        AUD_FECHA_CREACION = #{audFechaCreacion,jdbcType=TIMESTAMP},
+      </if>
+      <if test="audModificadoPor != null">
+        AUD_MODIFICADO_POR = #{audModificadoPor,jdbcType=VARCHAR},
+      </if>
+      <if test="audFechaModificacion != null">
+        AUD_FECHA_MODIFICACION = #{audFechaModificacion,jdbcType=TIMESTAMP},
+      </if>
+      <if test="audEliminadoPor != null">
+        AUD_ELIMINADO_POR = #{audEliminadoPor,jdbcType=VARCHAR},
+      </if>
+      <if test="audFechaEliminacion != null">
+        AUD_FECHA_ELIMINACION = #{audFechaEliminacion,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nuFolios != null">
+        NU_FOLIOS = #{nuFolios,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID_ARCHIVO = #{idArchivo,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="oefa.gob.pe.infraestructure_data.model.TMapArchivoAlfresco">
+    <!--@mbg.generated-->
+    update MONITOREO.T_MAP_ARCHIVO_ALFRESCO
+    set TX_NOMBRE_ARCHIVO = #{txNombreArchivo,jdbcType=VARCHAR},
+      TX_RUTA_ALFRESCO = #{txRutaAlfresco,jdbcType=VARCHAR},
+      TX_UIID = #{txUiid,jdbcType=VARCHAR},
+      TX_NOMBRE_ARCHIVO_ORIGINAL = #{txNombreArchivoOriginal,jdbcType=VARCHAR},
+      FG_SITREG = #{fgSitreg,jdbcType=CHAR},
+      AUD_CREADO_POR = #{audCreadoPor,jdbcType=VARCHAR},
+      AUD_FECHA_CREACION = #{audFechaCreacion,jdbcType=TIMESTAMP},
+      AUD_MODIFICADO_POR = #{audModificadoPor,jdbcType=VARCHAR},
+      AUD_FECHA_MODIFICACION = #{audFechaModificacion,jdbcType=TIMESTAMP},
+      AUD_ELIMINADO_POR = #{audEliminadoPor,jdbcType=VARCHAR},
+      AUD_FECHA_ELIMINACION = #{audFechaEliminacion,jdbcType=TIMESTAMP},
+      NU_FOLIOS = #{nuFolios,jdbcType=DECIMAL}
+    where ID_ARCHIVO = #{idArchivo,jdbcType=DECIMAL}
+  </update>
+  <update id="updateBatch" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update MONITOREO.T_MAP_ARCHIVO_ALFRESCO
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="TX_NOMBRE_ARCHIVO = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when ID_ARCHIVO = #{item.idArchivo,jdbcType=DECIMAL} then #{item.txNombreArchivo,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="TX_RUTA_ALFRESCO = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when ID_ARCHIVO = #{item.idArchivo,jdbcType=DECIMAL} then #{item.txRutaAlfresco,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="TX_UIID = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when ID_ARCHIVO = #{item.idArchivo,jdbcType=DECIMAL} then #{item.txUiid,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="TX_NOMBRE_ARCHIVO_ORIGINAL = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when ID_ARCHIVO = #{item.idArchivo,jdbcType=DECIMAL} then #{item.txNombreArchivoOriginal,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="FG_SITREG = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when ID_ARCHIVO = #{item.idArchivo,jdbcType=DECIMAL} then #{item.fgSitreg,jdbcType=CHAR}
+        </foreach>
+      </trim>
+      <trim prefix="AUD_CREADO_POR = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when ID_ARCHIVO = #{item.idArchivo,jdbcType=DECIMAL} then #{item.audCreadoPor,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="AUD_FECHA_CREACION = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when ID_ARCHIVO = #{item.idArchivo,jdbcType=DECIMAL} then #{item.audFechaCreacion,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+      <trim prefix="AUD_MODIFICADO_POR = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when ID_ARCHIVO = #{item.idArchivo,jdbcType=DECIMAL} then #{item.audModificadoPor,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="AUD_FECHA_MODIFICACION = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when ID_ARCHIVO = #{item.idArchivo,jdbcType=DECIMAL} then #{item.audFechaModificacion,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+      <trim prefix="AUD_ELIMINADO_POR = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when ID_ARCHIVO = #{item.idArchivo,jdbcType=DECIMAL} then #{item.audEliminadoPor,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="AUD_FECHA_ELIMINACION = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when ID_ARCHIVO = #{item.idArchivo,jdbcType=DECIMAL} then #{item.audFechaEliminacion,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+      <trim prefix="NU_FOLIOS = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when ID_ARCHIVO = #{item.idArchivo,jdbcType=DECIMAL} then #{item.nuFolios,jdbcType=DECIMAL}
+        </foreach>
+      </trim>
+    </trim>
+    where ID_ARCHIVO in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.idArchivo,jdbcType=DECIMAL}
+    </foreach>
+  </update>
+  <update id="updateBatchSelective" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update MONITOREO.T_MAP_ARCHIVO_ALFRESCO
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="TX_NOMBRE_ARCHIVO = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.txNombreArchivo != null">
+            when ID_ARCHIVO = #{item.idArchivo,jdbcType=DECIMAL} then #{item.txNombreArchivo,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="TX_RUTA_ALFRESCO = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.txRutaAlfresco != null">
+            when ID_ARCHIVO = #{item.idArchivo,jdbcType=DECIMAL} then #{item.txRutaAlfresco,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="TX_UIID = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.txUiid != null">
+            when ID_ARCHIVO = #{item.idArchivo,jdbcType=DECIMAL} then #{item.txUiid,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="TX_NOMBRE_ARCHIVO_ORIGINAL = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.txNombreArchivoOriginal != null">
+            when ID_ARCHIVO = #{item.idArchivo,jdbcType=DECIMAL} then #{item.txNombreArchivoOriginal,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="FG_SITREG = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.fgSitreg != null">
+            when ID_ARCHIVO = #{item.idArchivo,jdbcType=DECIMAL} then #{item.fgSitreg,jdbcType=CHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="AUD_CREADO_POR = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.audCreadoPor != null">
+            when ID_ARCHIVO = #{item.idArchivo,jdbcType=DECIMAL} then #{item.audCreadoPor,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="AUD_FECHA_CREACION = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.audFechaCreacion != null">
+            when ID_ARCHIVO = #{item.idArchivo,jdbcType=DECIMAL} then #{item.audFechaCreacion,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="AUD_MODIFICADO_POR = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.audModificadoPor != null">
+            when ID_ARCHIVO = #{item.idArchivo,jdbcType=DECIMAL} then #{item.audModificadoPor,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="AUD_FECHA_MODIFICACION = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.audFechaModificacion != null">
+            when ID_ARCHIVO = #{item.idArchivo,jdbcType=DECIMAL} then #{item.audFechaModificacion,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="AUD_ELIMINADO_POR = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.audEliminadoPor != null">
+            when ID_ARCHIVO = #{item.idArchivo,jdbcType=DECIMAL} then #{item.audEliminadoPor,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="AUD_FECHA_ELIMINACION = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.audFechaEliminacion != null">
+            when ID_ARCHIVO = #{item.idArchivo,jdbcType=DECIMAL} then #{item.audFechaEliminacion,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="NU_FOLIOS = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.nuFolios != null">
+            when ID_ARCHIVO = #{item.idArchivo,jdbcType=DECIMAL} then #{item.nuFolios,jdbcType=DECIMAL}
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where ID_ARCHIVO in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.idArchivo,jdbcType=DECIMAL}
+    </foreach>
+  </update>
+</mapper>

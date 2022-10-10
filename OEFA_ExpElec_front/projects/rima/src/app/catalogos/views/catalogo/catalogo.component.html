@@ -1,0 +1,108 @@
+<app-menu>
+  <mat-card>
+    <div>
+      <h2>Administracion de catalogos</h2>
+    </div>
+    <div class="zonas">
+      <!--SELECT ZONAS-->
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Catalogos</mat-label>
+          <mat-select>
+            <mat-option value="0" (click)="select('')">
+              -TODOS LOS CATALOGOS-
+            </mat-option>
+            <mat-option *ngFor="let p of padres" [value]="p.idItem" (click)="select(p.idItem)">
+              {{ p.valor }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <!--BTN INSERT CATALOGO-->
+      <div>
+        <button mat-raised-button color="primary" (click)="editCatalogo(null)">
+          <mat-icon matSuffix>add</mat-icon>  Nuevo Catalogo
+        </button>
+      </div>
+    </div>
+    <div class="filter" >
+      <div>
+        <mat-form-field>
+          <mat-label>Buscar</mat-label>
+          <mat-icon matSuffix>search</mat-icon>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input />
+        </mat-form-field>
+      </div>
+      <div class="item">
+        <button mat-raised-button color="primary" (click)="editItem(null)">
+          <mat-icon matSuffix>add</mat-icon>  Nuevo Item
+        </button>
+      </div>
+    </div>
+    <div>
+      <table mat-table [dataSource]="catalogos" class="mat-elevation-z8">
+        <!-- Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>ID</th>
+          <td [ngClass]="{ catalogoP: !element.idCatalogo }" mat-cell *matCellDef="let element">
+            {{ element.idCatalogo }}
+          </td>
+        </ng-container>
+
+        <!-- Column -->
+        <ng-container matColumnDef="valor">
+          <th mat-header-cell *matHeaderCellDef>VALOR</th>
+          <td [ngClass]="{ catalogoP: !element.idCatalogo }" mat-cell *matCellDef="let element">
+            {{ element.valor }}
+          </td>
+        </ng-container>
+
+        <!-- Column -->
+        <ng-container matColumnDef="etiqueta">
+          <th mat-header-cell *matHeaderCellDef>ETIQUETA</th>
+          <td [ngClass]="{ catalogoP: !element.idCatalogo }" mat-cell *matCellDef="let element">
+            {{ element.etiqueta }}
+          </td>
+        </ng-container>
+
+        <!-- Column -->
+        <ng-container matColumnDef="descripcion">
+          <th mat-header-cell *matHeaderCellDef>DESCRIPCION</th>
+          <td [ngClass]="{ catalogoP: !element.idCatalogo }" mat-cell *matCellDef="let element">
+            {{ element.descripcion }}
+          </td>
+        </ng-container>
+
+        <!-- Column -->
+        <ng-container matColumnDef="estado">
+          <th mat-header-cell *matHeaderCellDef>ESTADO</th>
+          <td [ngClass]="{ catalogoP: !element.idCatalogo }" mat-cell *matCellDef="let element">
+            <mat-slide-toggle *ngIf="element.activo" color="primary" [checked]="element.activo"
+              (change)="estado(element)" matTooltip="Desactivar"></mat-slide-toggle>
+            <mat-slide-toggle *ngIf="!element.activo" color="primary" [checked]="element.activo"
+              (change)="estado(element)" matTooltip="Activar"></mat-slide-toggle>
+          </td>
+        </ng-container>
+
+        <!-- Column -->
+        <ng-container matColumnDef="accion">
+          <th mat-header-cell *matHeaderCellDef>ACCION</th>
+          <td [ngClass]="{ catalogoP: !element.idCatalogo }" mat-cell *matCellDef="let element">
+            <a mat-button color="primary" matTooltip="Editar" (click)="editItem(element)">
+              <mat-icon>edit</mat-icon>
+            </a>
+            <a mat-button color="primary" matTooltip="Eliminar" (click)="eliminar(element)">
+              <mat-icon>delete</mat-icon>
+            </a>
+          </td>
+        </ng-container>
+        <!-- Header -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+      <!--Paginator-->
+      <mat-paginator [pageSizeOptions]="[15, 25, 40, 100]"></mat-paginator>
+    </div>
+    <!--BTN AGREGAR ITM-->
+  </mat-card>
+</app-menu>

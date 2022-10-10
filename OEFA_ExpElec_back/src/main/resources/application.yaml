@@ -1,0 +1,169 @@
+server:
+  port: 8080
+  tomcat:
+    mbeanregistry:
+      enabled: true
+    threads:
+      min-spare: 15
+      max: 250
+
+jwt:
+  secret: BiQVpcVzylX8DzFrI9CYaSONaoSPPhkp
+
+spring:
+  cache:
+    type: caffeine
+  banner:
+    location: "banner.txt"
+  application:
+    name: ${SERVICE_NAME}
+  datasource:
+    url: jdbc:p6spy:oracle:thin:@(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = ${DB_HOST})(PORT = ${DB_PORT})) (CONNECT_DATA = (SERVER = DEDICATED) (${DB_CONNECTION_TYPE} = ${DB_CONNECTION_VALUE})))
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+    hikari:
+      connection-test-query: SELECT 1 FROM DUAL
+      connection-timeout: 300000
+      maximum-pool-size: 60
+      leak-detection-threshold: 300000
+      pool-name: CORE_SIEE
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 500MB
+  mvc:
+    converters:
+      preferred-json-mapper: jackson
+  jpa:
+    properties:
+      "[hibernate.generate_statistics]": true
+      hibernate:
+        default_schema: CORE_SIEE
+
+    database: oracle
+
+logging:
+  level:
+    root: ${LOG_LEVEL}
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.hibernate.engine.internal.StatisticalLoggingSessionEventListener: off
+
+management:
+  info:
+    git:
+      mode: full
+    build:
+      enabled: true
+    java:
+      enabled: true
+    env:
+      enabled: true
+  metrics:
+    enable:
+      all: true
+    web:
+      client:
+        request:
+          autotime:
+            percentiles-histogram: true
+      server:
+        request:
+          autotime:
+            percentiles-histogram: true
+  health:
+    db:
+      enabled: true
+    diskspace:
+      enabled: false
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+  endpoint:
+    health:
+      probes:
+        enabled: true
+    prometheus:
+      enabled: true
+    metrics:
+      enabled: true
+  server:
+    port: 6587
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+        exclude:
+          - 'env'
+          - 'env-toMatch'
+
+oefa:
+  sso:
+    persona:
+      uri: ${REST_PERSONA_URI}
+    persona-extranjera:
+      uri: ${REST_PERSONA_EXTRANJERA_URI}
+    seguridad:
+      uri: ${REST_SEGURIDAD_URI}
+    dni_autorizado: ${REST_DNI_AUTORIZADO}
+    id_aplicacion: ${ID_APLICACION}
+    usuario_rest: ${REST_USUARIO}
+    clave_rest: ${REST_PASSWORD}
+    id_perfil_usuario_principal: ${REST_ID_PERFIL_USUARIO_PRINCIPAL}
+    id_perfil_usuario_secundario: ${REST_ID_PERFIL_USUARIO_SECUNDARIO}
+    key_token: ${REST_KEY_TOKEN}
+  alfresco:
+    url: ${ALFRESCO_REST_URL}
+    app: ${ALFRESCO_APP_ID}
+    user: ${ALFRESCO_USER}
+    pass: ${ALFRESCO_PASSWORD}
+    key_url: ${ALFRESCO_KEY_URL}
+  siia:
+    database:
+      url: ${SIIA_DATABASE_URL}
+      user: ${SIIA_DATABASE_USER}
+      pass: ${SIIA_DATABASE_PASSWORD}
+  siged:
+    user: ${SIGED_USER}
+    password: ${SIGED_PASSWORD}
+    login_url: ${SIGED_LOGIN_URL}
+    consulta_url: ${SIGED_CONSULTA_URL}
+
+sentry:
+  dsn: https://9df0805cde2e4f9b8ae39abd98972fee@sentry.expertsystems.pe/7
+  use-git-commit-id-as-release: true
+  send-default-pii: true
+  sample-rate: 1.0
+  environment: ${DB_CONNECTION_VALUE:localhost}
+  debug: false
+  enable-uncaught-exception-handler: true
+  exception-resolver-order: 2147483647
+  trace-sampling: true
+  traces-sample-rate: 1.0
+  attach-stacktrace: true
+  max-request-body-size: medium
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: redis
+  redis:
+    host: ${REDIS_HOST:redis-ima-master.ima.svc}
+    client-name: 'ima-backend'
+    port: ${REDIS_PORT:6379}
+    database: ${REDIS_DATABASE:0}
+    password: ${REDIS_PASSWORD:ima}
+  cache:
+    type: redis
+    redis:
+      enable-statistics: true
+      key-prefix: ima-backend
+
+management:
+  health:
+    redis:
+      enabled: true

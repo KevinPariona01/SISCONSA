@@ -1,0 +1,46 @@
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+### VS Code ###
+.vscode/
+!.vscode/launch.json
+
+### Logs ###
+logs/
+
+#DEPENDENCIA
+# pom.xml
+
+
+#Carpeta JBOSS
+${jboss.server.log.dir}
+/src/main/resources/reportes_hidro/JavaApplication4/nbproject/private/
+
+spy.log
+*.log

@@ -1,0 +1,98 @@
+<app-menu>
+    <mat-card>
+        <div>
+            <h2>Administracion de personal</h2>
+        </div>
+        <!--SELECT NUDOS-->
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Nudos</mat-label>
+                <mat-select>
+                    <mat-option value="0">
+                        -TODOS LOS Nudos-
+                    </mat-option>
+                    <mat-option *ngFor="let n of nudos" [value]="n.idItem">
+                        {{ n.valor }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <!--FILTRADO Y BTN-->
+        <div class="FilBtn" >
+            <div fxFlex="50">
+                <mat-form-field>
+                    <mat-label>Filter</mat-label>
+                    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+                </mat-form-field>
+            </div>
+            <!--BTN INSERT ASIGNACION-->
+            <div class="btn" fxFlex="50" >
+                <button mat-raised-button color="primary">Nuevo Catalogo</button>
+            </div>
+        </div>
+        <!--TABLA-->
+        <div>
+            <table mat-table class="mat-elevation-z8">
+                <!-- Column -->
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef>ID</th>
+                    <td [ngClass]="{'catalogoP': !element.idCatalogo }" mat-cell *matCellDef="let element">
+                        {{ element.idCatalogo }}</td>
+                </ng-container>
+
+                <!-- Column -->
+                <ng-container matColumnDef="nudo">
+                    <th mat-header-cell *matHeaderCellDef>NUDO</th>
+                    <td [ngClass]="{'catalogoP': !element.idCatalogo }" mat-cell *matCellDef="let element">
+                        {{ element.valor }}</td>
+                </ng-container>
+
+                <!-- Column -->
+                <ng-container matColumnDef="dni">
+                    <th mat-header-cell *matHeaderCellDef>DNI</th>
+                    <td [ngClass]="{'catalogoP': !element.idCatalogo }" mat-cell *matCellDef="let element">
+                        {{ element.etiqueta }}</td>
+                </ng-container>
+
+                <!-- Column -->
+                <ng-container matColumnDef="nombre">
+                    <th mat-header-cell *matHeaderCellDef>NOMBRE</th>
+                    <td [ngClass]="{'catalogoP': !element.idCatalogo }" mat-cell *matCellDef="let element">
+                        {{ element.descripcion }}</td>
+                </ng-container>
+
+                <!-- Column -->
+                <ng-container matColumnDef="usuario">
+                    <th mat-header-cell *matHeaderCellDef>USUARIO</th>
+                    <td [ngClass]="{'catalogoP': !element.idCatalogo }" mat-cell *matCellDef="let element">{{element.usuario}}</td>
+                </ng-container>
+
+                <!-- Column -->
+                <ng-container matColumnDef="activo">
+                    <th mat-header-cell *matHeaderCellDef>ACTIVO</th>
+                    <td [ngClass]="{'catalogoP': !element.idCatalogo }" mat-cell *matCellDef="let element">
+                        <mat-slide-toggle color="primary" [checked]="element.activo" matTooltip="Desactivar">
+                        </mat-slide-toggle>
+                    </td>
+                </ng-container>
+
+                <!-- Column -->
+                <ng-container matColumnDef="accion">
+                    <th mat-header-cell *matHeaderCellDef>ACCION</th>
+                    <td [ngClass]="{'catalogoP': !element.idCatalogo }" mat-cell *matCellDef="let element">
+                        <a mat-button color="primary" matTooltip="Eliminar">
+                            <mat-icon>delete</mat-icon>
+                        </a>
+                    </td>
+                </ng-container>
+
+                <!-- Header -->
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+            <!--Paginator-->
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+        </div>
+    </mat-card>
+</app-menu>

@@ -1,0 +1,37 @@
+<h1 mat-dialog-title>Editar Nudos de Ubigeo</h1>
+<div class="body" >
+    <br>
+    <form  #newForm="ngForm" (ngSubmit)="guardar(shoes._value, nudoUbigeo.idNudo, shoes.selectedOptions)" >
+        <div class="f1">
+            <!--SELECT DE NUDOS-->
+            <div fxFlex="32" >
+                <mat-form-field appearance="fill">
+                    <mat-label>Nudos</mat-label>
+                    <mat-select [(value)]="nudoUbigeo.idNudo" required >
+                        <mat-option *ngFor="let n of nudosPadre" [value]="n.idNudo"  >
+                            {{ n.nombre }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+        <!--LISTA-->
+        <div class="lista" >
+            <mat-selection-list #shoes>
+                <mat-list-option *ngFor="let d of departamentos" [value]="d" [selected]="d.ubigeoDpto == 0">
+                        {{d.departamento}}
+                </mat-list-option>          
+            </mat-selection-list>
+        </div>
+        <div *ngIf="departamentos.length==0" >
+            <p>No hay ubigeos</p>
+        </div>
+        <!--INPUT-->
+        <div mat-dialog-actions>
+            <button mat-raised-button type="submit" color="primary" cdkFocusInitial
+                [disabled]="!(newForm.form.valid && nudoUbigeo.idNudo>0)">
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+    </form>
+</div>

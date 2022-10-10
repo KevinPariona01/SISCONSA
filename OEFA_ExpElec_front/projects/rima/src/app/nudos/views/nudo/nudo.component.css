@@ -1,0 +1,59 @@
+table {
+  width: 100%;
+}
+th {
+  color: white;
+  background-color: #1d85bf;
+}
+.mat-column-id {
+  max-width: 80px !important;
+}
+.mat-column-nudo {
+  max-width: 100px !important;
+}
+.mat-column-departamento {
+  max-width: 100px !important;
+}
+.mat-column-ubigeo {
+  min-width: 80px !important;
+}
+.mat-column-activo {
+  max-width: 20px !important;
+}
+.mat-column-accion {
+  max-width: 20px !important;
+  }
+.FilBtn {
+  display: flex;
+}
+.btn {
+  text-align: right;
+}
+.nudos{
+  display: flex;
+}
+.nudos div{
+  padding: 1%;
+}
+.btn{
+  width: 100%;
+  padding: 1%;
+  text-align: right;
+}
+.filter{
+  display: flex;
+}
+.tables{
+  display: flex;
+}
+.tableUbigeo{
+  padding: 1%;
+  width: 59%;
+}
+.tableNudo{
+  padding: 1%;
+  width: 38%;
+}
+.test{
+  background-color: aqua;
+}

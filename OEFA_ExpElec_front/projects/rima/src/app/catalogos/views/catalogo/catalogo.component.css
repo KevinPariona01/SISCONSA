@@ -1,0 +1,51 @@
+table{
+    width: 100%;
+}
+th{
+    color: white;
+    background-color: #1d85bf;
+  }
+
+.mat-column-id {
+  max-width: 80px !important;
+}
+.mat-column-valor {
+  max-width: 30px !important;
+}
+.mat-column-etiqueta {
+  max-width: 100px !important;
+}
+.mat-column-descripcion {
+  min-width: 100px !important;
+}
+.mat-column-estado {
+  max-width: 20px !important;
+}
+.mat-column-accion {
+  max-width: 50px !important;
+}
+.item{
+  width: 100%;
+    padding: 1%;
+    text-align: right;
+}
+.zonas{
+ display: flex;
+}
+.zonas div{
+  padding: 1%;
+}
+.catalogoP{
+  background-color: #e2e7ea;
+}
+.filter{
+  display: flex;
+}
+.example{
+  width: 100%;
+}
+#test{
+  width: 800px;
+  height: 400px;
+  overflow: scroll;
+}

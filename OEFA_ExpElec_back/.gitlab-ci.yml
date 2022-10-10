@@ -1,0 +1,80 @@
+stages:
+  - package
+  - build-and-push
+  - deploy-support
+  - deploy
+
+default:
+  interruptible: true
+  cache: &global_cache
+    key: "cache"
+    paths:
+      - .m2/repository
+      - target
+    policy: pull-push
+
+package:
+  stage: package
+  image: maven:3-amazoncorretto-17
+  script:
+    - mvn package -DskipTests -Dmaven.repo.local=.m2/repository
+  rules:
+    - if: $CI_COMMIT_BRANCH == "desarrollo"
+
+include:
+  - project: 'oefa/plantillas/ci_cd_stages'
+    ref: latest
+    file:
+      - '/build.yml'
+      - '/deploy-kubernetes.yml'
+      
+deploy-redis:
+  stage: deploy-support
+  cache: {}
+  dependencies: []
+  interruptible: true
+  #variables:
+  #  GIT_STRATEGY: none # No necesito nada del repositorio para ejecutar el comando asi que mejor si no descargamos nada
+  image:
+    name: alpine/helm:latest
+    entrypoint:
+    - ''
+  environment:
+    name: desarrollo
+    kubernetes:
+      namespace: "$K8S_NAMESPACE"
+  script:
+  - apk update > /dev/null 2>&1
+  - apk add curl > /dev/null 2>&1
+  - curl -L https://github.com/a8m/envsubst/releases/download/v1.2.0/envsubst-Linux-x86_64 -o envsubst > /dev/null 2>&1
+  - chmod +x envsubst
+  - NS=`grep "namespace:" deploy/values.yml | awk '{print $2}'`
+  - helm repo add bitnami https://charts.bitnami.com/bitnami # No importa si corre mas de una vez
+  - helm repo update bitnami # Nos aseguramos de tener una version actualizada
+  - helm upgrade 
+    --install
+    -n $NS 
+    redis-ima 
+    bitnami/redis 
+    --debug                                                 
+    --reuse-values 
+    --timeout=8m0s 
+    --wait 
+    --atomic 
+    --cleanup-on-fail 
+    --history-max 3 
+    --set auth.enabled=true 
+    --set auth.password="ima"
+    --set metrics.enabled=true 
+    --set metrics.serviceMonitor.enabled=true 
+    --set metrics.serviceMonitor.interval=10s 
+    --set master.resources.limits.cpu=100m 
+    --set master.resources.limits.memory=100Mi 
+    --set replica.replicaCount=0 
+    --set master.persistence.enabled=false
+    --set master.disableCommands={FLUSHALL}
+    # Explicacion:
+    # replica.replicaCount -> Hace que el redis no funcione con replicas, solo un nodo maestro
+    # master.persistence.enabled -> Desactiva la necesidad de un PVC para el REDIS, no es realmente necesario, ya que solo es un caché de la BD.
+  rules:
+  - if: $CI_COMMIT_BRANCH == "desarrollo"

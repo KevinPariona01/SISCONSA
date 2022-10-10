@@ -1,0 +1,9 @@
+table{
+    width: 100%;
+}
+.FilBtn{
+    display: flex;
+}
+.btn{
+    text-align: right;
+}
