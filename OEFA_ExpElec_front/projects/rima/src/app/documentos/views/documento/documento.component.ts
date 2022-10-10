@@ -10,7 +10,12 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class DocumentoComponent implements OnInit {
 
-  public documentos = new MatTableDataSource();
+  //public documentos = new MatTableDataSource();
+
+  
+  filtro1 = '<span>&nbsp;</span>';
+  filtro2 = '<span style="font-weight:bold">&nbsp;</span>';
+  filtro3 = "<span style=\"font-family:'Times New Roman'\">&nbsp;</span>"
 
   documentos1:any= [
     {
@@ -21,23 +26,28 @@ export class DocumentoComponent implements OnInit {
     }
   ];
 
-  displayedColumns: string[] = [
-    'id',
-    'html',
-  ];
-
-
-  documento1:any;
-  documento = '';
+  documento:Documento={
+    id:0,
+    html:'',
+    comentario:'',
+    documento:''
+  };
 
   constructor(
     public documentoService: DocumentoService,
   ) { }
 
   ngOnInit(): void {
+    this.documento={
+      id:0,
+      html:'',
+      comentario:'',
+      documento:''
+    };
   }
 
 
+  //OBTENER DOCUMENTO DEL ADMINISTRADOR DE ARCHIVOS
   obtenerDocumento(){
     this.documentoService.documento({}).then((res)=>{
       let dato = document.getElementById("test");
@@ -45,6 +55,7 @@ export class DocumentoComponent implements OnInit {
     });
   }
 
+  //ITERADOR PARA INSERTAR 
   insertarDocumento(){
     const test:any = document.getElementById('test');
     let i = 0
@@ -58,10 +69,9 @@ export class DocumentoComponent implements OnInit {
         this.insertar(documento1);
       }
     }
-    console.log(this.documento1);
   }
 
-
+  //INSERTAR HACIA LA BD
   insertar(documento){
       this.documentoService.insertar(documento).then((res) => {
         console.log('editando', res);
@@ -77,21 +87,38 @@ export class DocumentoComponent implements OnInit {
       });
   }
 
+  //MUESTRA EL DOCUMENTO DE LA BD 
   mostrarDocumento(){
     this.documentoService.listar({}).then((res) => {
-      this.documentos = new MatTableDataSource<any>(res.content.dataSource);
       this.documentos1 = res.content.dataSource;
     });
-    console.log('documento: ',this.documentos); 
+    //console.log('documento: ',this.documentos); 
     console.log('documento1: ',this.documentos1);
   }
   
-  dataDocumentos(){
-    console.log(this.documentos1);
-    let data = document.getElementById('dataDocumentos');
-    this.documentos1.forEach(element => {
-        data.innerHTML += element.html;
-      
-    });
+  //MUESTRA EL FORMULARIO 
+  abrirComentario(id, comentario){
+    console.log("ID:", id ); 
+    this.documento.id = id;  
+    this.documento.comentario = comentario
   }
+
+
+  //INSERTAR EL FORMULARIO HACIA LA BD
+  insertarComentario(newform){
+    this.documentoService.insertarComentario(this.documento).then((res) => {
+      console.log('insertando comentario...', res);
+      try {
+        if (res.estado) {
+          console.log(res.estado);
+        } else {
+          console.log(res);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+      this.mostrarDocumento();
+    });
+}
+  
 }

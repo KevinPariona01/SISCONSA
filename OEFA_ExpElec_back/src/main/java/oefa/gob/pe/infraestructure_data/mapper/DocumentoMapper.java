@@ -13,9 +13,10 @@ public class DocumentoMapper {
 			{
 				SELECT("D.N_ID_HTML id");
 				SELECT("D.TX_HTML html");
-				//SELECT("C.TX_TITULO_DOCUMENTO documento");
-				//SELECT("C.TX_COMENTARIO comentario");
+				SELECT("D.TX_TITULO_DOCUMENTO documento");
+				SELECT("D.TX_COMENTARIO comentario");
 				FROM("CORE_SIEE.T_MAP_DOCUMENTO D");
+				ORDER_BY("D.N_ID_HTML");
 			}
 		}.toString();
 	}
@@ -29,5 +30,17 @@ public class DocumentoMapper {
 			}
 		}.toString();
 	}
+
+	public String insertarComentario(DTODocumentoSolicitud solicitud) {
+		return new SQL() {
+			{
+				UPDATE("CORE_SIEE.T_MAP_DOCUMENTO");
+				SET("TX_COMENTARIO = #{comentario, jdbcType=VARCHAR}");
+				WHERE("N_ID_HTML = #{id, jdbcType=INTEGER}");
+			}
+		}.toString();
+	}
+
+	
 
 }

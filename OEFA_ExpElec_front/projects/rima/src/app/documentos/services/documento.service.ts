@@ -33,6 +33,14 @@ export class DocumentoService {
     );
   }
 
+  insertarComentario(parametro): any {
+    return this.xsHttpApiService.post(
+      this.endpoint,
+      '/documento/insertarComentario',
+      parametro
+    );
+  }
+
   documento(parametro): any {
     return this.xsHttpApiService.post(
         this.endpoint,

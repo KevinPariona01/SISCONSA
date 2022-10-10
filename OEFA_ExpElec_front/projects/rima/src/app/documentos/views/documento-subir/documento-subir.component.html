@@ -1,0 +1,8 @@
+<app-menu>
+    <h3>Subir documento</h3>
+    <form id="ngForm"  #newForm="ngForm" (ngSubmit)="guardar(newForm)" method="post" enctype="multipart/form-data">
+        <input type="file"  accept=".docx"  #fileInput required id="archivo"  name="archivo" />
+        <input type="submit" />
+    </form>
+</app-menu>
+<div id="test" ></div>

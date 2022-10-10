@@ -42,4 +42,15 @@ public class DocumentoService {
         return xsRestServiceResponse;
     }
 
+    public XsRestServiceResponse<Void> insertarComentario(DTODocumentoSolicitud solicitud) {
+        XsRestServiceResponse<Void> xsRestServiceResponse = new XsRestServiceResponse<>();
+        try {
+            documentoRepository.insertarComentario(solicitud);
+        } catch (Exception ex) {
+            xsRestServiceResponse.SetException(ex);
+            log.error(ex.getMessage(), ex);
+        }
+        return xsRestServiceResponse;
+    }
+
 }

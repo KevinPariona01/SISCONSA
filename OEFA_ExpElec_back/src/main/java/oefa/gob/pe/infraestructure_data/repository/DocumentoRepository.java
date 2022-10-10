@@ -18,4 +18,7 @@ public interface DocumentoRepository {
     @SelectProvider(type = DocumentoMapper.class, method = "insertar")
     void insertar(DTODocumentoSolicitud solicitud);
 
+    @SelectProvider(type = DocumentoMapper.class, method = "insertarComentario")
+    void insertarComentario(DTODocumentoSolicitud solicitud);
+
 }

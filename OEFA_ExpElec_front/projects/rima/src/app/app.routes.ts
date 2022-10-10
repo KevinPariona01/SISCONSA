@@ -1,3 +1,4 @@
+import { DocumentoSubirComponent } from './documentos/views/documento-subir/documento-subir.component';
 import { DocumentoComponent } from './documentos/views/documento/documento.component';
 import { PersonalComponent } from './personales/views/personal/personal.component';
 import { NudoComponent } from './nudos/views/nudo/nudo.component';
@@ -27,4 +28,5 @@ export const APP_ROUTES: Routes = [
   {    path: 'conflicto-editar/:id',    component: ConflictoEditarComponent,    pathMatch: 'full',    data: { titlePage: 'TOKEN' },  }, 
   {    path: 'conflicto-seguimiento',    component: ConflictoSeguimientoComponent,    pathMatch: 'full',    data: { titlePage: 'TOKEN' },  }, 
   {    path: 'documento',    component: DocumentoComponent,    pathMatch: 'full',    data: { titlePage: 'TOKEN' },  }, 
+  {    path: 'documentoSubir',    component: DocumentoSubirComponent,    pathMatch: 'full',    data: { titlePage: 'TOKEN' },  }, 
 ];

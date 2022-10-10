@@ -36,9 +36,14 @@ public class DocumentoController {
     public XsRestServiceResponse<Void> insertar(@RequestBody DTODocumentoSolicitud solicitud) {
         return documentoService.insertar(solicitud);
     }
+    
+    @PostMapping("/insertarComentario")
+    public XsRestServiceResponse<Void> insertarComentario(@RequestBody DTODocumentoSolicitud solicitud) {
+        return documentoService.insertarComentario(solicitud);
+    }
 
     @PostMapping("/documento")
-	public XsRestServiceResponse<String> documento() {
+	public XsRestServiceResponse<String> documento(@RequestBody DTODocumentoSolicitud solicitud) {
         XsRestServiceResponse<String> xsRestServiceResponse = new XsRestServiceResponse<>();
         String documento = "";
         try{

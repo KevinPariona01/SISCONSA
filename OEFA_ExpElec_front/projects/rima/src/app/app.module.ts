@@ -110,6 +110,7 @@ import { PersonalComponent } from './personales/views/personal/personal.componen
 import { NudosEditarComponent } from './nudos/views/nudo-editar/nudo-editar.component';
 import { NudoInsertarComponent } from './nudos/views/nudo-insertar/nudo-insertar.component';
 import { DocumentoComponent } from './documentos/views/documento/documento.component';
+import { DocumentoSubirComponent } from './documentos/views/documento-subir/documento-subir.component';
 
 
 
@@ -223,6 +224,7 @@ enableRipple(true);
     NudosEditarComponent,
     NudoInsertarComponent,
     DocumentoComponent,
+    DocumentoSubirComponent,
     
   ],
   providers: [

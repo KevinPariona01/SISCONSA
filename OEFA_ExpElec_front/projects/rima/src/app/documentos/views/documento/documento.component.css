@@ -1,3 +1,25 @@
-table{
+.container{
+    text-align: center;
+    display: inline-block;  
     width: 100%;
+}
+.form{
+    float: left;
+    width: 19%;
+}
+.docs{
+    display: inline-block;   
+    width: 80%;
+    padding: 1%;
+}
+.doc p{
+    height: 350px;
+}
+
+.resaltador{
+    background-color: rgb(115, 115, 132);
+    border-radius: 6px;
+}
+div{
+    padding: 1%;
 }
